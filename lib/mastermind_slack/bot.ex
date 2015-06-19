@@ -2,7 +2,12 @@ defmodule MastermindSlack.Bot do
   use Slack
 
   def start_link(initial_state) do
-    Slack.start_link(__MODULE__, System.get_env("SLACK_BOT_API_TOKEN"), initial_state)
+    token = System.get_env("SLACK_BOT_API_TOKEN")
+    if token do
+      Slack.start_link(__MODULE__, System.get_env("SLACK_BOT_API_TOKEN"), initial_state)
+    else
+      exit "SLACK_BOT_API_TOKEN was not found, did you set it?"
+    end
   end
 
   def init(initial_state, slack) do

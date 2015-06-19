@@ -1,6 +1,7 @@
 defmodule MastermindSlack.Bot.Handler do
+  @bios_url System.get_env("BIOS_URL") || 'http://j.mp/biosbiosbios'
   @bios """
-  Oh you mean these? #{System.get_env("BIOS_URL")}
+  Oh you mean these? #{@bios_url}
   """
 
   def handle("show me those bios though", channel, slack=%Slack.State{}, state) do
